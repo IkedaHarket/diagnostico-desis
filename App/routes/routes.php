@@ -4,8 +4,6 @@ require_once 'App/Controllers/VoteController.php';
 require_once 'App/Controllers/CommuneController.php';
 require_once 'Router.php';
 
-require_once "App/config/connection.php";
-Database::getInstance();
 
 $router = new Router();
 
