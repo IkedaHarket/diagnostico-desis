@@ -13,7 +13,7 @@ class ProvinceModel{
     {
         try {
             $query = "SELECT * FROM tbl_provincia WHERE idRegion = $id";
-            $statement = DB->prepare($query);
+            $statement = $this->db->prepare($query);
             $statement->execute();
             
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);

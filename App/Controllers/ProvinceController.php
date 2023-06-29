@@ -5,7 +5,7 @@ class ProvinceController
 {
     public static function getProvincesByIdRegion($id){
         require_once __DIR__ . '/../Models/ProvinceModel.php';
-        $provinceModel = new ProvinceModel(DB);
+        $provinceModel = new ProvinceModel(Database::getInstance()->getConnection());
         return $provinceModel->getProvincesByIdRegion($id);
     }
 

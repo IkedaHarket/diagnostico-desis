@@ -5,7 +5,7 @@ class CandidateController
 {
     public static function getCandidates(){
         require_once __DIR__ . '/../Models/CandidateModel.php';
-        $regionModel = new CandidateModel(DB);
+        $regionModel = new CandidateModel(Database::getInstance()->getConnection());
         return $regionModel->getCandidates();
     }
 

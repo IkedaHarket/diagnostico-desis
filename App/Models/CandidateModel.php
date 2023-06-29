@@ -13,7 +13,7 @@ class CandidateModel{
     {
         try {
             $query = "SELECT * FROM candidate";
-            $statement = DB->prepare($query);
+            $statement = $this->db->prepare($query);
             $statement->execute();
             
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);

@@ -1,16 +1,33 @@
 <?php 
+class Database
+{
+    private static $instance; 
+    private $connection; 
 
-    $db_host = 'localhost';
-    $db_name = 'desis_vote';
-    $db_user = 'root';
-    $db_password = '';
-    
-    try {
-        $db = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_password);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $db->exec("SET NAMES utf8");
-    } catch (PDOException $e) {
-        echo 'Error de conexión: ' . $e->getMessage();
-        die(); 
+    private $db_host = 'localhost';
+    private $db_name = 'desis_vote';
+    private $db_user = 'root';
+    private $db_password = '';
+
+    private function __construct()
+    {
+        $this->connection = new PDO("mysql:host=$this->db_host;dbname=$this->db_name", $this->db_user, $this->db_password);
+        $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->connection->exec("SET NAMES utf8");
     }
-    define('DB',$db);
+
+    public static function getInstance()
+    {
+        if (!isset(self::$instance)) {
+            self::$instance = new Database();
+        }
+
+        return self::$instance;
+    }
+
+    public function getConnection()
+    {
+        return $this->connection;
+    }
+}
+

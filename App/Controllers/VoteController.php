@@ -22,7 +22,7 @@ class VoteController
     public function create()
     {
         require_once __DIR__ . '/../Models/VoteModel.php';
-        $voteModel = new VoteModel(DB);
+        $voteModel = new VoteModel(Database::getInstance()->getConnection());
         $resp = $voteModel->saveVote($_POST);
         echo json_encode($resp);
     }

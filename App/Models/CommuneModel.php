@@ -18,7 +18,7 @@ class CommuneModel{
             $result = [];
             foreach ($provinces as $province) {
                 $query = "SELECT * FROM tbl_comuna WHERE idProvincia = {$province['id']}";
-                $statement = DB->prepare($query);
+                $statement = $this->db->prepare($query);
                 $statement->execute();
                 
                 $result[] = $statement->fetchAll(PDO::FETCH_ASSOC);
