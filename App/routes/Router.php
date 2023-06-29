@@ -23,24 +23,15 @@ class Router
     {
         if (isset($this->routes[$requestMethod])) {
             foreach ($this->routes[$requestMethod] as $routePath => $callback) {
-                // Convertir las variables de ruta en patrones de coincidencia
                 $routePath = preg_replace('/\//', '\/', $routePath);
                 $routePath = preg_replace('/\{([\w]+)\}/', '(?P<$1>[^\/]+)', $routePath);
                 $routePath = '/^' . $routePath . '$/';
-
-                // Hacer coincidencia con la ruta solicitada
                 if (preg_match($routePath, $requestPath, $matches)) {
-                    // Eliminar el primer elemento de $matches que contiene la ruta completa
                     array_shift($matches);
-
-                    // Reemplazar las variables de ruta con sus valores en el callback
                     $callback = $this->replaceRouteVariables($callback, $matches);
-
-                    // Ejecutar el callback
                     if (is_callable($callback)) {
                         call_user_func_array($callback, $matches);
                     } else {
-                        // Manejar error: callback no válido
                         echo "Error: Invalid callback function";
                     }
 
@@ -48,8 +39,6 @@ class Router
                 }
             }
         }
-
-        // Manejar error: ruta no encontrada
         echo "Error: Route not found";
     }
 
